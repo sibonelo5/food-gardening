@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Food Gardening Support System - Login</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="centered">
+      <section class="card login-card">
+        <h1>Food Gardening Support System</h1>
+        <form id="login-form">
+          <div class="form-row">
+            <label for="username">Username</label>
+            <input id="username" name="username" required />
+          </div>
+          <div class="form-row">
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" required />
+          </div>
+          <div class="form-row inline">
+            <button id="login-btn" type="submit">Login</button>
+            <button id="register-btn" type="button" class="secondary">
+              Register
+            </button>
+          </div>
+          <p id="login-feedback" class="muted" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+    <script src="script.js"></script>
+  </body>
+  <script src="chatbot.js"></script>
+</html>

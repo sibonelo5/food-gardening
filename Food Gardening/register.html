@@ -1,0 +1,69 @@
+  <script src="chatbot.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up - Food Gardening Support System</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="centered">
+      <section class="card login-card">
+        <h1>Sign Up</h1>
+        <form id="register-form">
+          <div class="form-row">
+            <label for="reg-username">Username</label>
+            <input id="reg-username" name="reg-username" required />
+          </div>
+          <div class="form-row">
+            <label for="reg-password">Password</label>
+            <input id="reg-password" name="reg-password" type="password" required />
+          </div>
+          <div class="form-row inline">
+            <button id="register-submit" type="submit">Register</button>
+          </div>
+          <p id="register-feedback" class="muted" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+    <script>
+      // Registration logic for sign up page
+      const form = document.getElementById('register-form');
+      const userEl = document.getElementById('reg-username');
+      const passEl = document.getElementById('reg-password');
+      const feedback = document.getElementById('register-feedback');
+      function show(msg) {
+        if (feedback) feedback.textContent = msg;
+      }
+      function getUsers() {
+        try {
+          return JSON.parse(localStorage.getItem('fg_users_v1') || '{}');
+        } catch (e) {
+          return {};
+        }
+      }
+      function saveUsers(u) {
+        localStorage.setItem('fg_users_v1', JSON.stringify(u));
+      }
+      form.addEventListener('submit', function (ev) {
+        ev.preventDefault();
+        const u = userEl.value.trim();
+        const p = passEl.value;
+        if (!u || !p) {
+          show('Please provide username and password.');
+          return;
+        }
+        const users = getUsers();
+        if (users[u]) {
+          show('User already exists, choose a different username.');
+          return;
+        }
+        users[u] = p;
+        saveUsers(users);
+        show('Registration successful! You can now close this tab and log in.');
+        form.reset();
+      });
+    </script>
+  </body>
+</html>
